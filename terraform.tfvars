@@ -1,6 +1,6 @@
 aws_region = "ap-south-1"
 project_name = "ORO-Wealth"
-vpc_cidr = "10.0.0.0/16"
+vpc_id = "vpc-30b82559"
 public_cidrs = [
     "10.0.100.0/28",
     "10.0.200.0/28"

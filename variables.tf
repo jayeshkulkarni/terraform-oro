@@ -1,12 +1,22 @@
 variable "aws_region" {}
 
+variable "aws_access_key" {
+    type = "string"
+    decscription = "Access key"
+}
+
+variable "aws_secret_key" {
+    type = "string"
+    description = "Secret Key"
+}
+
 #------ storage variables
 
 variable "project_name" {}
 
 #-------networking variables
 
-variable "vpc_cidr" {}
+variable "vpc_id" {}
 
 variable "public_cidrs" {
   type = "list"

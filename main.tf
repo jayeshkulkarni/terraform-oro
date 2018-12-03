@@ -1,11 +1,13 @@
 provider "aws" {
+  access_key = "${var.aws_access_key}"
+  secret_key = "${var.aws_secret_key}"
   region = "${var.aws_region}"
 }
 
 terraform {
   backend "s3" {
     bucket = "oro-wealth"
-    key = "terraform/terraform.tfstate"
+    key = "terraform/oro.tfstate"
     region = "ap-south-1"
   }
 }
@@ -20,7 +22,7 @@ module "storage" {
 
 module "networking" {
   source       = "./networking"
-  vpc_cidr     = "${var.vpc_cidr}"
+  vpc_id     = "${var.vpc_id}"
   public_cidrs = "${var.public_cidrs}"
   accessip     = "${var.accessip}"
 }
