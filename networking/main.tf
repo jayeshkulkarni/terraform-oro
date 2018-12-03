@@ -17,20 +17,28 @@ data "aws_vpc" "custom" {
 id = "${var.vpc_id}"
 }
 
-resource "aws_internet_gateway" "tf_internet_gateway" {
-  vpc_id = "${data.aws_vpc.custom.id}"
+#resource "aws_internet_gateway" "tf_internet_gateway" {
+#  vpc_id = "${data.aws_vpc.custom.id}"
+#
+#  tags {
+#    Name = "tf_igw"
+#  }
+#}
 
-  tags {
-    Name = "tf_igw"
-  }
+data "aws_internet_gateway" "default" {
+filter {
+name = "attachment.vpc-id"
+values = ["${data.aws_vpc.custom.id}"]
 }
+}
+
 
 resource "aws_route_table" "tf_public_rt" {
   vpc_id = "${data.aws_vpc.custom.id}"
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.tf_internet_gateway.id}"
+    gateway_id = "${data.aws_internet_gateway.default.id}"
   }
  
   tags {
